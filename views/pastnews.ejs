@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+    <title>home</title>
+</head>
+
+<body>
+  <header id="head" class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" >hackers-news</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="#"></a>
+            <a class="nav-link" href="/past">اخبار گذشته</a>
+           
+            
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+
+  <div id="project" class="container-fluid" style=" max-width: 800px; margin-top: 3%;">
+    <div id="pr" style=" border-radius: 10px 10px 10px 10px; margin-top: 3%; background-color: rgba(0, 0, 0, 0.212); box-shadow: 5px 5px 80px rgba(0, 0, 0, 0.607);" class="card-body ">
+      <h5 id="title" class="card-title">Card title</h5>
+      <p id="content" class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a id="link" style="background-color: rgba(0, 0, 0, 0); color: black;" href="#" class="btn btn-primary">دیدن خبر به صورت کامل</a>
+      <p id="date"></p>
+      <hr>
+    </div>
+  </div>
+
+
+      
+
+</div>
+</div>
+
+
+<script>
+
+  fetch('http://localhost:3000/getnews' , {method : "GET"})
+  .then((resault)=>resault.json())
+  .then((res)=>{
+    // res.reverse()
+    document.getElementById('title').innerHTML = `news 1`
+    document.getElementById('content').innerHTML = res[0].title
+    document.getElementById('link').href = `/content/${res[0]._id}`
+    document.getElementById('date').innerHTML = res[0].date
+    document.getElementById('date').style.fontSize = '10px'
+    document.getElementById('date').style.marginTop = '2%'
+if (res.length > 20 ){
+  for (let i = 1 ; i< 20 ; i++){
+      
+      const project = document.getElementById('project')
+      const pr = document.getElementById('pr')
+      const prclone = pr.cloneNode()
+      project.appendChild(prclone)
+      const h5 = document.createElement('h5')
+      h5.innerHTML = `news ${i+1}`
+      prclone.appendChild(h5)
+
+      const p = document.createElement('p')
+      p.innerHTML = res[i].title
+      prclone.appendChild(p)
+
+      const a = document.createElement('a')
+      a.innerHTML = 'دیدن خبر به صورت کامل'
+      a.className='btn btn-primary'
+      a.href = `content/${res[i]._id}`
+      a.style.backgroundColor = 'rgba(0, 0, 0, 0)'
+      a.style.color = 'black'
+      prclone.appendChild(a)
+
+      const p2 = document.createElement('p')
+      p2.innerHTML = res[i].date
+      p2.style.fontSize = '10px'
+      p2.style.marginTop = '2%'
+      prclone.appendChild(p2)
+
+
+
+      const hr = document.createElement('hr')
+      
+      hr.className='container-fluid'
+      prclone.appendChild(hr)
+    }
+}else {
+  for (let i = 1 ; i< res.length ; i++){
+      
+      const project = document.getElementById('project')
+      const pr = document.getElementById('pr')
+      const prclone = pr.cloneNode()
+      project.appendChild(prclone)
+      const h5 = document.createElement('h5')
+      h5.innerHTML = `news ${i+1}`
+      prclone.appendChild(h5)
+
+      const p = document.createElement('p')
+      p.innerHTML = res[i].title
+      prclone.appendChild(p)
+
+      const a = document.createElement('a')
+      a.innerHTML = 'دیدن خبر به صورت کامل'
+      a.className='btn btn-primary'
+      a.href = `content/${res[i]._id}`
+      a.style.backgroundColor = 'rgba(0, 0, 0, 0)'
+      a.style.color = 'black'
+      prclone.appendChild(a)
+
+      const p2 = document.createElement('p')
+      p2.innerHTML = res[i].date
+      p2.style.fontSize = '10px'
+      p2.style.marginTop = '2%'
+      prclone.appendChild(p2)
+
+
+
+      const hr = document.createElement('hr')
+      
+      hr.className='container-fluid'
+      prclone.appendChild(hr)
+    }
+}
+    
+
+  })
+
+</script>
+
+
+</body>
+</html>
